@@ -15,7 +15,8 @@ This version works great:
 
 Install dependencies:
 
-    npm install -g supervisor coffee-script
+    npm install -g supervisor coffee-script bower
+    bower install
 
 You should now be able to run the app with:
 
