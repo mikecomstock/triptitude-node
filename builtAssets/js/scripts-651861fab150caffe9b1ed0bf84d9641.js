@@ -1,1 +1,0 @@
-(function(){console.log("great, it works")}).call(this),function(){}.call(this)
