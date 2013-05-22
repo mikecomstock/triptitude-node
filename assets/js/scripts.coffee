@@ -6,4 +6,6 @@
 #= require ../../components/underscore/underscore.js
 #= require ../../components/backbone/backbone.js
 
+#= require app.js
+#= require_tree /views/
 #= require_tree /
