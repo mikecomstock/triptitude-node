@@ -1,4 +1,4 @@
-class app.MapView extends Backbone.View
+class TT.MapView extends Backbone.View
   id: 'map-view'
 
   render: ->

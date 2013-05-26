@@ -1,8 +1,8 @@
-class app.MainView extends Backbone.View
+class TT.MainView extends Backbone.View
   el: 'body'
 
   initialize: ->
-    @mapView = new app.MapView()
+    @mapView = new TT.MapView()
 
   template: """
             <h1>this is the template</h1>

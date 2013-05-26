@@ -1,1 +1,5 @@
-window.app = {}
+window.TT = {}
+
+$ ->
+  mainView = new TT.MainView()
+  mainView.render()
