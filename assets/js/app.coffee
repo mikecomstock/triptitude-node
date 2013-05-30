@@ -23,11 +23,10 @@ class TT.MainRouter extends Backbone.Router
   }
 
 $ ->
-  TT.Session = {
-    MainRouter: new TT.MainRouter
-    MainView: new TT.MainView { model: m }
-    interval: setInterval -> m.set 'name', (new Date).getSeconds() , 1000
-  }
+  TT.Session = new Backbone.Model
+  TT.Session.MainRouter = new TT.MainRouter
+  TT.Session.MainView = new TT.MainView { model: m }
+  TT.Session.interval = setInterval -> m.set 'name', (new Date).getSeconds() , 1000
 
   TT.Session.MainView.render()
 

@@ -2,8 +2,9 @@ class TT.MainView extends Backbone.View
   el: 'body'
 
   initialize: ->
-    @planView = new TT.Views.Plan({ model: @model })
-    @mapView = new TT.MapView()
+    @facebookRoot = new TT.Views.Facebook
+    @planView = new TT.Views.Plan { model: @model }
+    @mapView = new TT.MapView
     @loginView = new TT.Views.Login
 
   events: {
@@ -46,8 +47,11 @@ class TT.MainView extends Backbone.View
     @$el.html @template
     @stickit()
 
-    #@$el.append @loginView.el
-    #@loginView.render()
+    @$el.prepend @facebookRoot.el
+    @facebookRoot.render()
+
+    @$el.append @loginView.el
+    @loginView.render()
 
     @$el.append @planView.el
     @planView.render()

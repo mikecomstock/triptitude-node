@@ -11,6 +11,6 @@ class TT.MapView extends Backbone.View
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(@map);
 
-    @map.on 'click', (e) ->
+    @map.on 'click', (e) =>
       new L.Marker(e.latlng).addTo @map
     @
