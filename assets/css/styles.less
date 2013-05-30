@@ -1,13 +1,63 @@
-// See https://github.com/adunkman/connect-assets instructions
+// From http://colourco.de/
+@color1: #C65480;
+@color2: #C6AD54;
+@color3: #54AFC6;
+@color4: #6AC4DA;
+@color5: #4895A8;
 
 @import "../../components/bootstrap/less/bootstrap.less";
+@import "../../components/font-awesome/build/assets/font-awesome/less/font-awesome.less";
 @import "../../components/leaflet/dist/leaflet.css";
 
+// Logo font
+@import url(http://fonts.googleapis.com/css?family=Montserrat+Alternates);
+
+// Some basic style resets
+a:hover { text-decoration: none; }
+
+#nav1 {
+  line-height: 80px;
+  font-size: 30px;
+  background-color: @color4;
+  ul {
+    margin: 0;
+    text-align: center;
+    li {
+      margin: 0 20px;
+      &.logo {
+        font-size: 50px;
+        font-family: 'Montserrat Alternates', sans-serif;
+        color: @color5;
+      }
+    }
+  }
+}
+
+#plan-view .nav2 {
+  line-height: 40px;
+  font-size: 16px;
+  background-color: @color3;
+  ul {
+    margin: 0;
+    li {
+      margin: 0 10px;
+      &.current-trip {
+        width: 300px;
+        font-size: 18px;
+        background-color: @color2;
+        margin: 0;
+        padding: 10px;
+      }
+    }
+  }
+}
+
+
 #map-view {
-  width: 800px;
-  height: 500px;
-  border: 1px solid blue;
   position: absolute;
-  top: 100px;
-  left: 400px;
+  z-index: -1;
+  top: 80px;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
