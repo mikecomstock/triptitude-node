@@ -20,6 +20,7 @@ class TT.MainRouter extends Backbone.Router
 
     "": ->
       console.log 'route: root'
+      TT.Session.MainView.landing()
   }
 
 $ ->
