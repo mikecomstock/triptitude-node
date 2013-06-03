@@ -3,13 +3,8 @@ class TT.Views.Login extends Backbone.View
   className: 'modal hide fade'
 
   events: {
-    'click .log-in': (e) ->
-      e.preventDefault()
-      FB.login()
-
-    'click .log-out': (e) ->
-      e.preventDefault()
-      FB.logout()
+    'click .log-in': (e) -> FB.login()
+    'click .log-out': (e) -> FB.logout()
   }
 
   bindings: {

@@ -2,7 +2,7 @@ class TT.Views.Plan extends Backbone.View
   id: 'plan-view'
 
   initialize: ->
-    @packingListView = new TT.PackingListView( {model: @model })
+    @packingListView = new TT.PackingListView
 
   template: """
             <div class="nav2">

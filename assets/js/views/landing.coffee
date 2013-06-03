@@ -2,13 +2,10 @@ class TT.Views.Landing extends Backbone.View
   id: 'landing-view'
 
   events: {
-    'click .log-in': (e) ->
-      e.preventDefault()
-      FB.login()
-
-    'click .log-out': (e) ->
-      e.preventDefault()
-      FB.logout()
+    'click .log-in': (e) -> FB.login (response)->
+      console.log 'well worked'
+      TT.Navigate 'plan'
+    'click .log-out': (e) -> FB.logout()
   }
 
   template: """
