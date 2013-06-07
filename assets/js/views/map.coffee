@@ -1,11 +1,10 @@
-class TT.MapView extends Backbone.View
+class TT.Views.Map extends Backbone.View
   id: 'map-view'
 
-  events: {
+  events:
     # If this view starts hidden, the map gets initialized with a wrong size,
     # so we need to have the map resize itself whenever this view is shown.
     'activate': -> @map.invalidateSize()
-  }
 
   render: ->
     @map = L.map @el, {

@@ -35,7 +35,7 @@ a:hover { text-decoration: none; }
   }
 }
 
-#landing-view {
+#not-logged-in-view {
   text-align: center;
 }
 
@@ -60,7 +60,8 @@ a:hover { text-decoration: none; }
 
 
 #map-view {
-  position: absolute;
+  // The L.map call sets position: relative for some reason.
+  position: absolute !important;
   z-index: -1;
   top: 80px;
   left: 0;
