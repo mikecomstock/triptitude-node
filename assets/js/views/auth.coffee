@@ -3,24 +3,19 @@ class TT.Views.Auth extends Backbone.View
 
   initialize: ->
     @facebookRoot = new TT.Views.Facebook
-    @views =
-      notLoggedIn: new TT.Views.NotLoggedIn
-      loggedIn: new TT.Views.LoggedIn
+    @listenTo TT.Session, 'change', @userChanged
 
-    # TT.Session.set('user') happens right away on page load,
-    # so this is used to set the initial logged in/not visibility.
-    @listenTo TT.Session, 'change', => @updateVisibility()
-
-  updateVisibility: ->
+  # TT.Session.set('user') happens on initial page load,
+  # and whenever facebook status changes.
+  userChanged: ->
+    @currentView.remove() if @currentView
     if TT.Session.get('user')
-      @views.loggedIn.$el.show()
-      @views.notLoggedIn.$el.hide()
+      @currentView = new TT.Views.LoggedIn
     else
-      @views.loggedIn.$el.hide()
-      @views.notLoggedIn.$el.show()
+      @currentView = new TT.Views.NotLoggedIn
+
+    @$el.append @currentView.render().el
 
   render: ->
     @$el.append @facebookRoot.render().$el.hide()
-    @$el.append @views.notLoggedIn.render().$el.hide()
-    @$el.append @views.loggedIn.render().$el.hide()
     @

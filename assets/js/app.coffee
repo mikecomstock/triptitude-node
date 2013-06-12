@@ -15,7 +15,7 @@ class TT.Routers.User extends Backbone.Router
   routes:
     'home': 'home'
 
-class TT.Routers.Trip extends Backbone.Router
+class TT.Routers.Plan extends Backbone.Router
   routes:
     'plan': 'plan'
 
@@ -29,33 +29,36 @@ $(document).on 'click', 'a[href]:not([data-bypass])', (e) ->
     e.preventDefault()
     Backbone.history.navigate(href.attr, true)
 
+# Some initial setup
+$.cookie.json = true # Setup jquery.parse so we can store json objects
+$.cookie.path = '/'  # Make cookies global
+
+# A global singleton model
+TT.Session = new Backbone.Model
+
+# Create an instance for each router in TT.Routers
+TT.Session.Routers = {}
+for routerName, router of TT.Routers
+  do (routerName) ->
+    r = TT.Session.Routers[routerName] = new router
+    r.on 'route', (route) -> console.log "#{routerName} router -> #{route}"
+
 $ ->
-  # Setup jquery.parse so we can store json objects
-  $.cookie.json = true
-
-  TT.Session = new Backbone.Model
-  TT.Session.Routers =
-    Main: new TT.Routers.Main
-    User: new TT.Routers.User
-    Trip: new TT.Routers.Trip
-
-  # For debugging routes
-  for routerName, router of TT.Session.Routers
-    router.on 'route', (route) -> console.log "#{routerName} router -> #{route}"
-
   new TT.Views.Auth().render()
 
   if $.cookie 'user'
     # On initial load, we think a user is signed in, so start history
-    # and let the routers do their thing.
+    # and let the routers do their thing without a redirect.
     console.log 'user has cookie, so setting TT.Session'
+    console.log $.cookie('user')
     TT.Session.set 'user', new Backbone.Model $.cookie('user')
     Backbone.history.start({ pushState: true })
   else
     # On initial load, we don't have a user, so redirect to root.
     # Tricky because we don't want the router to start working until
     # the user is at the correct url.
-    console.log 'no user, redirecting'
+    TT.Session.set 'user', null
+    console.log 'no user, redirecting to root'
     Backbone.history.start({ pushState: true, silent: true })
     Backbone.history.navigate('', false)
     Backbone.history.loadUrl()

@@ -18,6 +18,12 @@ class TT.Views.Facebook extends Backbone.View
         @authResponseChange response
         FB.Event.subscribe 'auth.authResponseChange', @authResponseChange
 
+      # On initial page load, parse any facebook tags that are present.
+      # Specifically, if the not-logged-in view is active, parse the
+      # facebook login button.
+      FB.XFBML.parse()
+
+    # Register the Facebook sdk async. window.fbAsyncInit gets called once it's loaded.
     id = 'facebook-jssdk'
     unless document.getElementById(id)
       js = document.createElement('script')
@@ -28,17 +34,22 @@ class TT.Views.Facebook extends Backbone.View
       ref.parentNode.insertBefore(js, ref)
 
   authResponseChange: (response) =>
-    console.log 'facebook login status updated:', response.status
+    console.log 'Facebook status change:', response.status
     if (response.status == 'connected')
-      # The response object is returned with a status field that lets the app know the current
-      # login status of the person. In this case, we're handling the situation where they
-      # have logged in to the app.
       FB.api '/me', (response) ->
-        user = new Backbone.Model { name: response.name }
-        TT.Session.set 'user', user
-        $.cookie 'user', user.toJSON()
+        user = new Backbone.Model(response)
+        # We only want 'change:user' to fire if the user is
+        # actually different from the the current user.
+        currentUser = TT.Session.get('user')
+        if currentUser == null or currentUser.get('id') != user.get('id')
+          TT.Session.set 'user', user
+          $.cookie 'user', user.toJSON()
+          console.log 'new user was just set, so redirecting to home'
+          TT.Navigate 'home'
     else
-      # The person is not logged into Facebook, or not logged into the app
-      TT.Session.set 'user', null
-      $.removeCookie 'user'
-      TT.Navigate '/', false
+      if TT.Session.get('user')
+        TT.Session.set 'user', null
+        $.removeCookie 'user'
+        console.log 'user was just logged ou, so redirecting to root'
+        TT.Navigate '', false
+        FB.XFBML.parse()

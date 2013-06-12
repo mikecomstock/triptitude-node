@@ -17,4 +17,15 @@ class TT.Views.User.Home extends Backbone.View
   render: ->
     @$el.html @template
     @stickit(TT.Session, @sessionBindings)
+
+    #console.log TT.Session.get('user')
+    #trips = new TT.Views.User.Home.Trips
+    #collection: TT.Session.get('user').get('trips')
+      #@$el.append trips.render().el
+
+    @
+
+class TT.Views.User.Home.Trips extends Backbone.View
+  render: ->
+    @$el.html 'test'
     @

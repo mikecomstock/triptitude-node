@@ -7,9 +7,15 @@ class TT.Views.LoggedIn extends Backbone.View
       plan: new TT.Views.Plan
       map: new TT.Views.Map
 
-    @listenTo TT.Session.Routers.User, 'route', => @switchTo @views.userHome
-    @listenTo TT.Session.Routers.Trip, 'route', => @switchTo @views.plan
+    @listenTo TT.Session.Routers.User, 'route',         => @switchTo @views.userHome
+    @listenTo TT.Session.Routers.Plan, 'route',         => @switchTo @views.plan
     @listenTo TT.Session.Routers.Main, 'route:explore', => @switchTo @views.map
+
+    # If they are logged in, but trying to access a not-logged-in view,
+    # redirect them to /home
+    @listenTo TT.Session.Routers.Main, 'route:landing', =>
+      console.log 'redirecting to user home because a person is logged in'
+      TT.Navigate('/home')
 
   events:
     'click .logout': (e) -> FB.logout()
@@ -21,14 +27,6 @@ class TT.Views.LoggedIn extends Backbone.View
     else
       view.$el.fadeIn().trigger('activate')
     @currentView = view
-
-  bindings:
-    '.plan, .explore':
-      observe: 'user',
-      updateView: false,
-      visible: (value, options) -> value
-      visibleFn: ($el, isVisible, options) ->
-        if isVisible then $el.fadeIn() else $el.fadeOut()
 
   template: """
             <div id="nav1">
