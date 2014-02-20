@@ -6,7 +6,7 @@ class TT.Views.Plan extends Backbone.View
 
   template: """
             <div class="nav2">
-              <ul class="inline">
+              <ul class="list-inline">
                 <li class="current-trip">Name of Current Trip</li>
                 <li><a href="plan/itinerary"><i class="icon-list"> Itinerary</i></a></li>
                 <li><a href="plan/packing"><i class="icon-briefcase"></i> Packing List</a></li>

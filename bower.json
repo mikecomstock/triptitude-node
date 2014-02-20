@@ -1,0 +1,13 @@
+{
+  "name": "triptitude-node",
+  "dependencies": {
+    "jquery": "~2.1.0",
+    "backbone.stickit": "~0.7.0",
+    "underscore": "~1.6.0",
+    "backbone": "~1.1.1",
+    "font-awesome": "~4.0.3",
+    "jquery.cookie": "~1.4.0",
+    "leaflet-0.7.2": "http://leaflet-cdn.s3.amazonaws.com/build/leaflet-0.7.2.zip",
+    "bootstrap": "~3.1.1"
+  }
+}

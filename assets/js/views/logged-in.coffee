@@ -30,11 +30,11 @@ class TT.Views.LoggedIn extends Backbone.View
 
   template: """
             <div id="nav1">
-              <ul class="inline">
-                <li class="plan"><a href="/plan">Plan <i class="icon-map-marker"></i></a></li>
+              <ul class="list-inline">
+                <li class="plan"><a href="/plan">Plan <i class="fa fa-map-marker"></i></a></li>
                 <li class="logo"><a href="/home">triptitude</a></li>
-                <li class="explore"><a href="/explore"><i class="icon-globe"></i> Explore</a></li>
-                <li class="logout">Log Out</li>
+                <li class="explore"><a href="/explore"><i class="fa fa-globe"></i> Explore</a></li>
+                <li class="logout btn btn-default">Log Out</li>
               </ul>
             </div>
             """
